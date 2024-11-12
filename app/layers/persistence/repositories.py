@@ -1,4 +1,5 @@
 # capa DAO de acceso/persistencia de datos.
+# Esta capa manipula los objetos de la base de datos
 
 from app.models import Favourite
 

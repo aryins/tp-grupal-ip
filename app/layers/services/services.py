@@ -1,4 +1,5 @@
 # capa de servicio/lógica de negocio
+# Esta capa implementa la lógica de negocio y reglas que determinan cómo se cambian los
 
 from ..persistence import repositories
 from ..utilities import translator
@@ -10,13 +11,15 @@ def getAllImages(input=None):
 
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images.
     images = []
-
+    for datoCrudo in json_collection:
+        cardConversion = fromRequestIntoCard(datoCrudo)
+        images.append(cardConversion)
     return images
 
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
-    fav = '' # transformamos un request del template en una Card.
-    fav.user = '' # le asignamos el usuario correspondiente.
+    fav = 'fromTemplateIntoCard(request)' # transformamos un request del template en una Card.
+    fav.user = '' # le asignamos el usuario correspondiente. VER COMO CAMBIARLO
 
     return repositories.saveFavourite(fav) # lo guardamos en la base.
 
@@ -31,7 +34,7 @@ def getAllFavourites(request):
         mapped_favourites = []
 
         for favourite in favourite_list:
-            card = '' # transformamos cada favorito en una Card, y lo almacenamos en card.
+            card = 'fromRepositoryIntoCard(favourite)' # transformamos cada favorito en una Card, y lo almacenamos en card.
             mapped_favourites.append(card)
 
         return mapped_favourites
