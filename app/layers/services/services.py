@@ -3,13 +3,14 @@
 from ..persistence import repositories
 from ..utilities import translator
 from django.contrib.auth import get_user
+from ..transport import transport
 
 def getAllImages(input=None):
     # obtiene un listado de datos "crudos" desde la API, usando a transport.py.
-    json_collection = []
+    json_collection = transport.getAllImages()
 
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images.
-    images = []
+    images = [translator.fromRequestIntoCard(image) for image in json_collection]
 
     return images
 
