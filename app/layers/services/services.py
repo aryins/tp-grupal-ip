@@ -12,14 +12,14 @@ def getAllImages(input=None):
     # recorre cada dato crudo de la colección anterior, lo convierte en una Card y lo agrega a images.
     images = []
     for datoCrudo in json_collection:
-        cardConversion = fromRequestIntoCard(datoCrudo)
+        cardConversion = translator.fromRequestIntoCard(datoCrudo)
         images.append(cardConversion)
     return images
 
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
-    fav = 'fromTemplateIntoCard(request)' # transformamos un request del template en una Card.
-    fav.user = '' # le asignamos el usuario correspondiente. VER COMO CAMBIARLO
+    fav = translator.fromTemplateIntoCard(request) # transformamos un request del template en una Card.
+    fav.user = request.user # le asignamos el usuario correspondiente. VER COMO CAMBIARLO
 
     return repositories.saveFavourite(fav) # lo guardamos en la base.
 
@@ -30,11 +30,11 @@ def getAllFavourites(request):
     else:
         user = get_user(request)
 
-        favourite_list = [] # buscamos desde el repositories.py TODOS los favoritos del usuario (variable 'user').
+        favourite_list = repositories.getAllFavourites(user) # buscamos desde el repositories.py TODOS los favoritos del usuario (variable 'user').
         mapped_favourites = []
 
         for favourite in favourite_list:
-            card = 'fromRepositoryIntoCard(favourite)' # transformamos cada favorito en una Card, y lo almacenamos en card.
+            card = translator.fromRepositoryIntoCard(favourite) # transformamos cada favorito en una Card, y lo almacenamos en card.
             mapped_favourites.append(card)
 
         return mapped_favourites

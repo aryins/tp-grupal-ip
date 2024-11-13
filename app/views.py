@@ -14,7 +14,6 @@ def home(request):
     images = services.getAllImages()
     favourite_list = services.getAllFavourites(request)
     return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
-print(home(request))
 
 def search(request):
     search_msg = request.POST.get('query', '')
