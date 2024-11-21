@@ -1,0 +1,21 @@
+{% extends 'header.html' %} 
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h2 class="text-center">Bienvenido {{ user.username | upper }}!</h2>
+    {% else %}
+        <h2 class="text-center">Bienvenido!</h2>
+    {% endif %}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p class="text-center">
+        Mirá las imágenes desde <a href="{% url 'home' %}">este link.</a>
+    </p>
+{% endblock %}
