@@ -28,7 +28,7 @@ def search(request):
             if(search_msg in card.name):
                 images.append(card)
            
-        favourite_list = []  
+        favourite_list = services.getAllFavourites(request) 
         return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list})
     else:
         return redirect('home')
