@@ -15,7 +15,7 @@ def home(request):
     images = services.getAllImages()
     favourite_list = services.getAllFavourites(request)
     
-    images_por_pag = Paginator(images,40)
+    images_por_pag = Paginator(images,20)
     page = request.GET.get('page',1)
     images_page = images_por_pag.get_page(int(page))
 
