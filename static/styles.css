@@ -1,0 +1,176 @@
+body {
+    color: #ffffff; /* Texto en blanco */
+    background-color: #393a39; /* Fondo negro */
+    font-family: "Comic Sans", cursive;
+}
+
+.table-responsive {
+    margin: 30px 0;
+}
+
+.table-wrapper {
+    min-width: 1000px;
+    background-color: #1a1a1a; /* Fondo oscuro para el contenedor */
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(105, 101, 101, 0.1); /* Sombra clara */
+    color: #ffffff; /* Texto en blanco */
+}
+
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+    min-width: 100%;
+    color: #ffffff; /* Texto en blanco */
+}
+
+.table-title h2 {
+    margin: 8px 0 0;
+    font-size: 22px;
+    color: #ffffff; /* Texto en blanco */
+}
+
+.search-box {
+    position: relative;
+    float: right;
+}
+
+.search-box input {
+    height: 34px;
+    border-radius: 20px;
+    padding-left: 35px;
+    border-color: #444;
+    background-color: #333; /* Fondo oscuro */
+    color: #ffffff; /* Texto en blanco */
+}
+
+.search-box input:focus {
+    border-color: #3FBAE4;
+    background-color: #333;
+    color: #ffffff;
+}
+
+.search-box i {
+    color: #a0a5b1;
+    position: absolute;
+    font-size: 19px;
+    top: 8px;
+    left: 10px;
+}
+
+table.table {
+    color: #ffffff; /* Texto en blanco */
+}
+table.table tr td,
+table.table tr th {
+    color: #ffffff; /* Texto en blanco */
+    border-color: #ffffff; /* Borde oscuro */
+}
+
+table.table-striped tbody tr:nth-of-type(odd) {
+    color: #ffffff;
+    background-color: #545454; /* Fondo oscuro  favoritos*/
+}
+
+table.table-striped.table-hover tbody tr:hover {
+    background: #eefcfc; /* Fondo de hover más oscuro */
+}
+
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+    color:3000#ffffff;
+}
+
+table.table td:last-child {
+    width: 130px;
+}
+
+table.table td a {
+    color: #a0a5b1;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+table.table td a.view {
+    color: #03A9F4;
+}
+
+table.table td a.edit {
+    color: #FFC107;
+}
+
+table.table td a.delete {
+    color: #ff2f00;
+}
+
+table.table td i {
+    font-size: 19px;
+    color: #ffffff;
+}
+
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+
+.pagination li a {
+    border: none;
+    font-size: 95%;
+    width: 30px;
+    height: 30px;
+    color: #999;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 30px !important;
+    text-align: center;
+    padding: 0;
+    background: #333;
+}
+
+.pagination li a:hover {
+    color: #666;
+    background: #444;
+}
+
+.pagination li.active a {
+    background: #03A9F4;
+    color: #ffffff;
+}
+
+.pagination li.active a:hover {
+    background: #0397d6;
+}
+
+.pagination li.disabled i {
+    color: #555;
+}
+
+.pagination li i {
+    font-size: 16px;
+    padding-top: 6px;
+    color: #ffffff;
+}
+
+.hint-text {
+    float: left;
+    margin-top: 6px;
+    font-size: 95%;
+    color: #ffffff; /* Texto en blanco */
+}
+.card {
+    background-color: #333333; /* Gris oscuro */
+    color: #FFFFFF; /* Blanco */
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+}
+/* Cambiar color de los enlaces en la barra de navegación */
+.navbar-nav .nav-link {
+    color: #52496d; 
+}
+
+/* Cambiar color cuando el enlace cuando pasa el ratón por encima */
+.navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
