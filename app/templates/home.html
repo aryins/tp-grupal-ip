@@ -1,51 +1,80 @@
-{% extends 'header.html' %} {% block content %}
+{% extends 'header.html' %} {% load static %} {% block content %}
 <main>
+    <style>
+        body {
+            background-image: url("{% static "images/fondosdepantalla, wallpapers, inspiration, inspiracion, space, espacion, galaxy, galaxia, black, dark, stars, estrellas, night, noche.jpg" %}");
+            background-size: cover; /* La imagen cubrirá toda la pantalla */
+            background-position: center; /* Centrar la imagen */
+            background-repeat: no-repeat; /* Evitar que la imagen se repita */
+            background-attachment: fixed; /* Hace que el fondo se mantenga fijo al hacer scroll */
+            color: white; /* Cambiar el color del texto para que sea legible */
+        }
+    </style>
     <h1 class="text-center">Buscador Rick & Morty</h1>
-
-    <div class="d-flex justify-content-end" style="margin-bottom: 1%; margin-right: 2rem;">
+    <div class="d-flex justify-content-center" style="margin-bottom: 1%">
         <!-- Selector de página -->
         <nav aria-label="...">
             <ul class="pagination">
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="?page=1">1</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="?page=2">2</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="?page=3">3</a>
-                </li>
+                {% if images.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ images.previous_page_number }}&query={{ query }}" tabindex="-1">⬅️</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">⬅️</a>
+                    </li>
+                {% endif %}
+                
+                {% for page_num in images.paginator.page_range %}
+                    {% if images.number == page_num %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page={{ page_num }}&query={{ query }}">{{ page_num }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_num }}&query={{ query }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if images.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ images.next_page_number }}&query={{ query }}">➡️</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">➡️</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
-    </div>
-
+    </div>    
     <div class="d-flex justify-content-center" style="margin-bottom: 1%">
         <!-- Buscador del sitio -->
         <form class="d-flex" action="{% url 'buscar' %}" method="POST">
             {% csrf_token %}
-            <input class="form-control me-2" type="search" name="query" placeholder="Escribí una palabra" aria-label="Search">
+            <input class="form-control me-2" type="search" name="query" value="{{ query }}" placeholder="Escribí una palabra" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% if images|length == 0 %}
-        <h2 class="text-center">La búsqueda no arrojó resultados...</h2>
-        {% else %} {% for img in images %}
-        <div class="col">
-            <div class="card mb-3 ms-5" style="max-width: 540px;">{% if img.status == 'Alive' %}
-                <span class="border border-success"> {% elif img.status == 'Dead' %}
-                    <span class="border border-danger"> {% else %}
-                        <span class="border border-warning"> {% endif %}
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ img.url }}" class="card-img-top" alt="imagen">
-                    </div>
+            <h2 class="text-center">La búsqueda no arrojó resultados...</h2>
+        {% else %}
+            {% for img in images %}
+            <div class="col">
+                <div class="card mb-3 ms-5" style="max-width: 540px;">
+                    <span class="border {% if img.status == 'Alive' %}border-success{% elif img.status == 'Dead' %}border-danger{% else %}border-warning{% endif %}">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ img.url }}" class="card-img-top" alt="imagen">
+                            </div>
 
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ img.name }}</h3>
-                            <p class="card-text">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ img.name }}</h3>
+                                    <p class="card-text">
                                 <strong>
                                             {% if img.status == 'Alive' %} 🟢 {{ img.status }} 
                                             {% elif img.status == 'Dead' %} 🔴 {{ img.status }} 

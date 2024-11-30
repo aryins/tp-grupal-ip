@@ -22,7 +22,7 @@ def home(request):
     return render(request, 'home.html', { 'images': images_page, 'favourite_list': favourite_list })
 
 def search(request):
-    search_msg = request.POST.get('query', '')
+    search_msg = request.POST.get('query', request.GET.get('query', ''))
 
     # si el texto ingresado no es vacío, trae las imágenes y favoritos desde services.py,
     # y luego renderiza el template (similar a home).
@@ -32,9 +32,14 @@ def search(request):
     if (search_msg != ''):
         images = services.getAllImages(search_msg)         
         favourite_list = services.getAllFavourites(request) 
-        return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list})
+               
+        images_por_pag = Paginator(images,20)
+        page = request.GET.get('page',1)
+        images_page = images_por_pag.get_page(int(page))
+
+        return render(request, 'home.html', { 'images': images_page, 'favourite_list': favourite_list, 'query': search_msg})
     else:
-        return redirect('home')
+        return redirect('home.html')
 
 
 # Estas funciones se usan cuando el usuario está logueado en la aplicación.

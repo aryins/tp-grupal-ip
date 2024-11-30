@@ -1,5 +1,4 @@
 # capa DAO de acceso/persistencia de datos.
-
 from app.models import Favourite
 
 def saveFavourite(image):
